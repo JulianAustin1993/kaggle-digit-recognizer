@@ -16,7 +16,7 @@ class DrDataLoader(object):
         target = features.pop("label")
         return tf.data.Dataset.from_tensor_slices(
             (
-                tf.reshape(tf.convert_to_tensor(features, tf.float32), [-1, 28, 28]),
+                tf.reshape(tf.convert_to_tensor(features, tf.float32), [-1, 28, 28, 1]),
                 target,
             )
         )
@@ -25,5 +25,5 @@ class DrDataLoader(object):
         archive = zipfile.ZipFile(self.dataset_fp, "r")
         features = pd.read_csv(archive.open("test.csv"))
         return tf.data.Dataset.from_tensor_slices(
-            (tf.reshape(tf.convert_to_tensor(features, tf.float32), [-1, 28, 28]))
+            (tf.reshape(tf.convert_to_tensor(features, tf.float32), [-1, 28, 28, 1]))
         )
